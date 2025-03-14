@@ -71,3 +71,25 @@ from employee_demographics ed
 left join employee_salary es
 	on ed.employee_id = es.employee_id;
 
+
+-- Day 3 --
+
+select concat(first_name, ' ', last_name) as employee_name
+from employee_demographics;
+
+select department_name, upper(department_name)
+from parks_departments;
+
+select first_name, length(first_name)
+from employee_demographics;
+
+select last_name, substring(last_name, 1, 3) as short_name
+from employee_demographics;
+
+select employee_id, first_name, salary,
+case
+	when salary >= 70000 then 'high'
+    when salary between 50000 and 69990 then 'medium'
+    when salary < 50000 then 'low'
+end as salary_rank
+from employee_salary;
