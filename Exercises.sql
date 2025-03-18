@@ -93,3 +93,31 @@ case
     when salary < 50000 then 'low'
 end as salary_rank
 from employee_salary;
+
+-- Day4 --
+
+select employee_id, first_name, last_name, age
+from employee_demographics
+where age > (
+    select avg(age) 
+    from employee_demographics
+);
+
+select employee_id, first_name, last_name, salary, dept_id
+from employee_salary as es
+left join parks_departments as pd
+	on es.dept_id = pd.department_id
+where salary > (
+    select avg(salary) 
+    from employee_salary
+);
+
+
+select es.employee_id, concat(ed.first_name, ' ', ed.last_name) as employee_name, es.salary, es.dept_id
+from employee_salary es
+join employee_demographics ed on es.employee_id = ed.employee_id
+where salary = (
+    select max(salary) 
+    from employee_salary 
+    where dept_id = es.dept_id
+);
